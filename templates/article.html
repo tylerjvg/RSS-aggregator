@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .meta { color: #555; font-size: 0.9em; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ article.title }}</h1>
+
+    <p class="meta">
+        Source: {{ article.source }}
+        {% if article.pubDate %} | Date: {{ article.pubDate }}{% endif %}
+    </p>
+
+    <p>
+        {{ article.description | striptags }}
+    </p>
+
+    <p>
+        Original article:
+        <a href="{{ article.link }}" target="_blank">
+            {{ article.link }}
+        </a>
+    </p>
+
+    <p><a href="{{ url_for('index') }}">Back to all news titles</a></p>
+</div>
+</body>
+</html>

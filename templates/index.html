@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        h1 { text-align: center; }
+        .articles {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .article {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .article:last-child { border-bottom: none; }
+        .article-title { font-size: 1.05em; margin-bottom: 4px; }
+        .article-meta { font-size: 0.9em; color: #555; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>News</h1>
+
+    <div class="articles">
+        <h2>All News</h2>
+
+        {% if not articles %}
+            <p>No articles available right now.</p>
+        {% else %}
+            {% for a in articles %}
+                <div class="article">
+                    <div class="article-title">
+                        <a href="{{ url_for('article', article_id=a.id) }}">
+                            {{ a.title }}
+                        </a>
+                    </div>
+                    <div class="article-meta">
+                        Source: {{ a.source }}
+                        {% if a.pubDate %}
+                            | Date: {{ a.pubDate }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
